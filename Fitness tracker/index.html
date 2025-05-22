@@ -2,29 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fitness Tracker</title>
+    <title>Unbreakable Fitness Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f3e5f5, #e0f7fa);
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #4a148c;
+            margin-bottom: 10px;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #6a1b9a;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #4a148c;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #7e57c2;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5e35b1;
+        }
+        table {
+            width: 100%;
+            margin-top: 40px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #d1c4e9;
+            color: #4a148c;
+        }
+        tr:nth-child(even) {
+            background-color: #f3e5f5;
+        }
+    </style>
 </head>
 <body>
-    <h1>Fitness Tracker</h1>
+    <h1>💪 Unbreakable Fitness Tracker</h1>
+    <nav>
+        <a href="/">🏠 Home</a>
+        <a href="/analytics">📊 Analytics</a>
+    </nav>
+
     <form action="/submit" method="post">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" placeholder="Your name"><br><br>
+        <label for="name">🧍 Name:</label>
+        <input type="text" name="name" placeholder="e.g. John" required>
 
-        <label for="date">Date:</label><br>
-        <input type="date" id="date" name="date"><br><br>
+        <label for="date">📅 Date:</label>
+        <input type="date" name="date" required>
 
-        <label for="exercise">Exercise:</label><br>
-        <input type="text" id="exercise" name="exercise" placeholder="e.g. Running"><br><br>
+        <label for="exercise">🏃 Exercise (multiple allowed):</label>
+        <input type="text" name="exercise" placeholder="e.g. Running, Jogging" required>
 
-        <label for="duration">Duration (minutes):</label><br>
-        <input type="number" id="duration" name="duration"><br><br>
+        <label for="duration">⏱️ Duration:</label>
+        <input type="number" name="duration" placeholder="e.g. 20 (minutes)" required>
 
-        <label for="calories">Calories Burned:</label><br>
-        <input type="number" id="calories" name="calories"><br><br>
+        <label for="steps">👣 Steps Count:</label>
+        <input type="number" name="steps" placeholder="e.g. 3000">
 
-        <button type="submit">Submit Workout</button>
+        <button type="submit">🚀 Submit Workout</button>
     </form>
-    <br>
-    <a href="/workouts">View Workout History</a>
+
+    {% if workouts %}
+    <h2 style="text-align:center; color:#4a148c;">📚 Workout History</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Exercise</th>
+            <th>Duration</th>
+            <th>Steps</th>
+        </tr>
+        {% for w in workouts %}
+        <tr>
+            <td>{{ w.name }}</td>
+            <td>{{ w.date }}</td>
+            <td>{{ w.exercise }}</td>
+            <td>{{ w.duration }}</td>
+            <td>{{ w.steps }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
 </body>
 </html>
